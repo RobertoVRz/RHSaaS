@@ -84,6 +84,7 @@
             @endif
 
             <div class="content">
+                <img height="400" src="{{asset('assets/logo.jpeg')}}">
                 <div class="title m-b-md">
                     Bienvenido al Software de R.H.
                 </div>
