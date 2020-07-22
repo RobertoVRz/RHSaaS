@@ -58,6 +58,10 @@
                 text-transform: uppercase;
             }
 
+            .parrafo {
+                font-size: 20px;
+            }
+
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -73,7 +77,7 @@
                         <a href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}">Registrarse</a>
                         @endif
                     @endauth
                 </div>
@@ -81,18 +85,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Bienvenido al Software de R.H.
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="parrafo">
+                    <p>Por favor inicia sesión si ya tienes una cuenta, de lo contrario, registrate para poder utilizar el software</p>
                 </div>
             </div>
         </div>
