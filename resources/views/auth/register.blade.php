@@ -40,6 +40,23 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="tipo" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Usuario') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" id="tipo" name="tipo" required>
+                                    <option value="Postulante">Postulante</option>
+                                    <option value="RH">RH</option>
+                                </select>
+
+                                @error('tipo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
