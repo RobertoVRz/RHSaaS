@@ -1,46 +1,39 @@
 <template>
     <div class="container">
         <div class="row  justify-content-center">
-                <img height="300" src="assets/logo.jpeg">
+            <img height="300" src="assets/logo.jpeg" />
             <div class="col-md-8 ">
                 <div class="card">
                     <div class="card-header">Solicitudes Pendientes</div>
 
                     <div class="card-body">
                         <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Puesto</th>
-      <th scope="col">C.V.</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Juanito Mendoza</td>
-      <td>Recursos Humanos</td>
-      <td><a href="#">Ver Documento</a></td>
-      <td><button class="btn-success btn mr-2">Aceptar</button><button class="btn-danger btn">Rechazar</button></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Mariela Pérez</td>
-      <td>Recursos Humanos</td>
-      <td><a href="#">Ver Documento</a></td>
-      <td><button class="btn-success btn mr-2">Aceptar</button><button class="btn-danger btn">Rechazar</button></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Monica Rodríguez</td>
-      <td>Recursos Humanos</td>
-      <td><a href="#">Ver Documento</a></td>
-      <td><button class="btn-success btn mr-2">Aceptar</button><button class="btn-danger btn">Rechazar</button></td>
-    </tr>
-  </tbody>
-</table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Puesto</th>
+                                    <th scope="col">C.V.</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(solicitud, i) of solicitudes" :key="i">
+                                    <th scope="row">{{ i + 1 }}</th>
+                                    <td>{{ solicitud.nombre }}</td>
+                                    <td>{{ solicitud.puesto }}</td>
+                                    <td><a :href="solicitud.documento" target="_blank">Ver Documento</a></td>
+                                    <td>{{ solicitud.status }}</td>
+                                    <td>
+                                        <button class="btn-success btn mr-2">
+                                            Aceptar</button
+                                        ><button class="btn-danger btn">
+                                            Rechazar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -49,9 +42,28 @@
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
+import Axios from "axios";
+
+export default {
+    data() {
+        return {
+            solicitudes: []
+        };
+    },
+    async created() {
+        await this.obtenerDatos();
+    },
+    methods: {
+        async obtenerDatos() {
+            await Axios.get("/obtenerSolicitudes")
+                .then(data => {
+                    console.log(data);
+                    this.solicitudes = data.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     }
+};
 </script>

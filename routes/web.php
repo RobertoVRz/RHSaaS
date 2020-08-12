@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user', 'UserController@index')->name('user');
+Route::post('/crearSolicitud', 'UserAPI@crearSolicitud');
+Route::post('/subirArchivo', 'UserAPI@subirArchivo');
+Route::get('/obtenerSolicitudes', 'UserAPI@obtenerSolicitudes');

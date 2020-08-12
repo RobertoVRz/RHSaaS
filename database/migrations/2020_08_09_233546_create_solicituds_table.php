@@ -15,6 +15,9 @@ class CreateSolicitudsTable extends Migration
     {
         Schema::create('solicituds', function (Blueprint $table) {
             $table->id();
+            $table->text('nombre')->nullable();
+            $table->text('puesto')->nullable();
+            $table->text('status')->nullable();
             $table->timestamps();
         });
     }
