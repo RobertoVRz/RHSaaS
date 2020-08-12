@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,7 +29,7 @@ class UserAPI extends Controller
     public function crearSolicitud(Request $request)
     {
         $id = DB::table('solicituds')->insertGetId(
-            ['nombre' => $request->get('nombre'), 'puesto' => $request->get('puesto'), 'status' => 'Pendiente']
+            ['nombre' => $request->get('nombre'), 'puesto' => $request->get('puesto'), 'status' => 'Pendiente', 'idUsuario' => Auth::user()->id]
         );
         return $id;
     }
@@ -43,7 +44,16 @@ class UserAPI extends Controller
     {
         $solicitudes = DB::table('solicituds')->get();
         for ($i = 0; $i < count($solicitudes); $i++) {
-            $solicitudes[$i]->documento = Storage::url('solicitudes/'.$solicitudes[$i]->id.'/cv.pdf');
+            $solicitudes[$i]->documento = Storage::url('solicitudes/' . $solicitudes[$i]->id . '/cv.pdf');
+        }
+        return $solicitudes;
+    }
+
+    public function obtenerSolicitudesUsuario()
+    {
+        $solicitudes = DB::table('solicituds')->where('idUsuario', Auth::user()->id)->get();
+        for ($i = 0; $i < count($solicitudes); $i++) {
+            $solicitudes[$i]->documento = Storage::url('solicitudes/' . $solicitudes[$i]->id . '/cv.pdf');
         }
         return $solicitudes;
     }

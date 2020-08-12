@@ -28,4 +28,5 @@ Route::get('/user', 'UserController@index')->name('user');
 Route::post('/crearSolicitud', 'UserAPI@crearSolicitud');
 Route::post('/subirArchivo', 'UserAPI@subirArchivo');
 Route::get('/obtenerSolicitudes', 'UserAPI@obtenerSolicitudes');
+Route::get('/obtenerSolicitudesUsuario', 'UserAPI@obtenerSolicitudesUsuario');
 Route::post('/editarStatus', 'UserAPI@editarStatus');

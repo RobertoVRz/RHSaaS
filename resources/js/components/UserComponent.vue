@@ -23,11 +23,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(solicitud, i) of solicitudes" :key="i">
+                                <tr
+                                    v-for="(solicitud, i) of solicitudes"
+                                    :key="i"
+                                >
                                     <th scope="row">{{ i + 1 }}</th>
                                     <td>{{ solicitud.nombre }}</td>
                                     <td>{{ solicitud.puesto }}</td>
-                                    <td><a :href="solicitud.documento" target="_blank">Ver Documento</a></td>
+                                    <td>
+                                        <a
+                                            :href="solicitud.documento"
+                                            target="_blank"
+                                            >Ver Documento</a
+                                        >
+                                    </td>
                                     <td>{{ solicitud.status }}</td>
                                 </tr>
                             </tbody>
@@ -79,9 +88,6 @@
 import Axios from "axios";
 
 export default {
-    mounted() {
-        console.log("Component mounted.");
-    },
     data() {
         return {
             opcion: "mandar",
@@ -96,10 +102,10 @@ export default {
     },
     methods: {
         async obtenerDatos() {
-            await Axios.get("/obtenerSolicitudes")
+            await Axios.get("/obtenerSolicitudesUsuario")
                 .then(data => {
                     console.log(data);
-                    this.solicitudes = data.data
+                    this.solicitudes = data.data;
                 })
                 .catch(error => {
                     console.log(error);
@@ -122,6 +128,13 @@ export default {
                             this.file
                         );
                         alert("Información guardada correctamente");
+                        this.solicitudes.push({
+                            nombre: this.nombre,
+                            puesto: this.puesto,
+                            status: "Pendiente",
+                            documento:
+                                "/storage/solicitudes/" + data.data + "/cv.pdf"
+                        });
                         this.nombre = "";
                         this.puesto = "";
                     })

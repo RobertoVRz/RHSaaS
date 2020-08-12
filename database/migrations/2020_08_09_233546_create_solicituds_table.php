@@ -18,6 +18,7 @@ class CreateSolicitudsTable extends Migration
             $table->text('nombre')->nullable();
             $table->text('puesto')->nullable();
             $table->text('status')->nullable();
+            $table->integer('idUsuario');
             $table->timestamps();
         });
     }

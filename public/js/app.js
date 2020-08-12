@@ -2153,11 +2153,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log("Component mounted.");
-  },
   data: function data() {
     return {
       opcion: "mandar",
@@ -2196,7 +2202,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/obtenerSolicitudes").then(function (data) {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/obtenerSolicitudesUsuario").then(function (data) {
                   console.log(data);
                   _this2.solicitudes = data.data;
                 })["catch"](function (error) {
@@ -2240,10 +2246,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                           case 3:
                             alert("Información guardada correctamente");
+
+                            _this3.solicitudes.push({
+                              nombre: _this3.nombre,
+                              puesto: _this3.puesto,
+                              status: "Pendiente",
+                              documento: "/storage/solicitudes/" + data.data + "/cv.pdf"
+                            });
+
                             _this3.nombre = "";
                             _this3.puesto = "";
 
-                          case 6:
+                          case 7:
                           case "end":
                             return _context3.stop();
                         }
