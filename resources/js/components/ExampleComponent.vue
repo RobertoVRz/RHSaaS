@@ -25,9 +25,9 @@
                                     <td><a :href="solicitud.documento" target="_blank">Ver Documento</a></td>
                                     <td>{{ solicitud.status }}</td>
                                     <td>
-                                        <button class="btn-success btn mr-2">
+                                        <button class="btn-success btn mr-2" @click="status('Aceptado', i, solicitud.id)">
                                             Aceptar</button
-                                        ><button class="btn-danger btn">
+                                        ><button class="btn-danger btn" @click="status('Rechazado', i, solicitud.id)">
                                             Rechazar
                                         </button>
                                     </td>
@@ -63,6 +63,18 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        async status(status, i, id) {
+            await Axios.post('/editarStatus', {
+                id: id,
+                status: status
+            }).then(data => {
+                console.log(data)
+                this.solicitudes[i].status = status
+            }).catch(error => {
+                console.log(error)
+                alert('No fue posible actualizar el status')
+            })
         }
     }
 };

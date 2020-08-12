@@ -2023,6 +2023,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    status: function status(_status, i, id) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/editarStatus', {
+                  id: id,
+                  status: _status
+                }).then(function (data) {
+                  console.log(data);
+                  _this3.solicitudes[i].status = _status;
+                })["catch"](function (error) {
+                  console.log(error);
+                  alert('No fue posible actualizar el status');
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     }
   }
 });
@@ -38666,7 +38694,40 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(solicitud.status))]),
                     _vm._v(" "),
-                    _vm._m(1, true)
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn-success btn mr-2",
+                          on: {
+                            click: function($event) {
+                              return _vm.status("Aceptado", i, solicitud.id)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                        Aceptar"
+                          )
+                        ]
+                      ),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn-danger btn",
+                          on: {
+                            click: function($event) {
+                              return _vm.status("Rechazado", i, solicitud.id)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                        Rechazar\n                                    "
+                          )
+                        ]
+                      )
+                    ])
                   ])
                 }),
                 0
@@ -38694,21 +38755,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("C.V.")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Status")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn-success btn mr-2" }, [
-        _vm._v("\n                                        Aceptar")
-      ]),
-      _c("button", { staticClass: "btn-danger btn" }, [
-        _vm._v(
-          "\n                                        Rechazar\n                                    "
-        )
       ])
     ])
   }

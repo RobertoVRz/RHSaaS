@@ -55,9 +55,12 @@ class UserAPI extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editarStatus(Request $request)
     {
-        //
+        $solicitud = DB::table('solicituds')
+            ->where('id', $request->get('id'))
+            ->update(['status' => $request->get('status')]);
+        return $solicitud;
     }
 
     /**
